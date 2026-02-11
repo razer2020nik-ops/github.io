@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drynchek1337DXC - Cyber Portal</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+    <title>Drynchek1337DXC | Elite Portal</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
     
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap');
+
         * {
             margin: 0;
             padding: 0;
@@ -14,84 +16,48 @@
         }
 
         :root {
-            --neon-cyan: #00ffff;
-            --neon-pink: #ff10f0;
-            --neon-green: #39ff14;
-            --dark-bg: #0a0a0f;
-            --card-bg: rgba(20, 20, 30, 0.8);
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --dark: #0f0f23;
+            --darker: #050510;
+            --light: #e2e8f0;
         }
 
         body {
-            font-family: 'Courier New', monospace;
-            background: var(--dark-bg);
-            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--darker);
+            color: var(--light);
             overflow-x: hidden;
-            cursor: crosshair;
+            line-height: 1.6;
         }
 
-        /* Matrix Rain Background */
-        #matrix-bg {
+        /* Animated Gradient Background */
+        .bg-gradient {
             position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
         }
 
-        /* Animated Grid Background */
-        .cyber-grid {
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .bg-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: grid-move 10s linear infinite;
-            z-index: -2;
-        }
-
-        @keyframes grid-move {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
-
-        /* Loading Screen */
-        .loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--dark-bg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            animation: fadeOut 1s forwards 2s;
-        }
-
-        .loader-text {
-            font-size: 3rem;
-            color: var(--neon-cyan);
-            text-shadow: 0 0 30px var(--neon-cyan);
-            animation: pulse 0.5s infinite alternate;
-        }
-
-        @keyframes fadeOut {
-            to {
-                opacity: 0;
-                visibility: hidden;
-            }
-        }
-
-        @keyframes pulse {
-            from { opacity: 0.5; }
-            to { opacity: 1; }
+            z-index: -1;
+            background: var(--darker);
+            opacity: 0.85;
         }
 
         /* Header */
@@ -99,70 +65,83 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 20px 50px;
-            background: rgba(10, 10, 15, 0.95);
+            padding: 20px 5%;
+            background: rgba(15, 15, 35, 0.8);
             backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.3);
             z-index: 1000;
-            border-bottom: 2px solid var(--neon-cyan);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            transition: all 0.3s;
+        }
+
+        header.scrolled {
+            padding: 15px 5%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 2rem;
-            font-weight: bold;
-            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-pink));
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: neon-flicker 2s infinite;
+            letter-spacing: 2px;
+            position: relative;
         }
 
-        @keyframes neon-flicker {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
+        .logo::after {
+            content: '_';
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 30px;
+            gap: 40px;
         }
 
         nav a {
-            color: #fff;
+            color: var(--light);
             text-decoration: none;
-            padding: 10px 20px;
-            border: 1px solid transparent;
+            font-weight: 500;
+            font-size: 1.1rem;
             transition: all 0.3s;
             position: relative;
-            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         nav a::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--neon-cyan);
-            transition: left 0.3s;
-            z-index: -1;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: all 0.3s;
+            transform: translateX(-50%);
         }
 
         nav a:hover::before {
-            left: 0;
+            width: 100%;
         }
 
         nav a:hover {
-            color: var(--dark-bg);
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 20px var(--neon-cyan);
+            color: var(--primary);
         }
 
         /* Hero Section */
@@ -171,564 +150,529 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 100px 5% 50px;
             position: relative;
-            padding-top: 100px;
         }
 
-        .hero-content {
-            text-align: center;
-            z-index: 10;
+        .hero-container {
+            max-width: 1400px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
         }
 
-        .glitch-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-
-        .glitch {
-            font-size: 5rem;
+        .hero-text h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
             font-weight: 900;
-            text-transform: uppercase;
-            color: #fff;
-            letter-spacing: 5px;
-            animation: glitch-anim 2s infinite;
-            position: relative;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .glitch::before,
-        .glitch::after {
-            content: "Drynchek1337DXC";
+        .hero-text .tagline {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            color: rgba(226, 232, 240, 0.8);
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.6);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--light);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        /* 3D Card */
+        .hero-card {
+            perspective: 1000px;
+        }
+
+        .card-3d {
+            width: 100%;
+            height: 500px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+            border-radius: 20px;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-3d:hover {
+            transform: rotateY(10deg) rotateX(10deg);
+        }
+
+        .card-icon {
+            font-size: 6rem;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(226, 232, 240, 0.7);
+            text-transform: uppercase;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 5%;
+            background: rgba(15, 15, 35, 0.5);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: rgba(226, 232, 240, 0.7);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-box {
+            background: rgba(15, 15, 35, 0.6);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-box::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-        }
-
-        .glitch::before {
-            animation: glitch-anim-1 0.5s infinite;
-            color: var(--neon-cyan);
-            z-index: -1;
-            animation-delay: 0.1s;
-        }
-
-        .glitch::after {
-            animation: glitch-anim-2 0.5s infinite;
-            color: var(--neon-pink);
-            z-index: -2;
-            animation-delay: 0.2s;
-        }
-
-        @keyframes glitch-anim {
-            0%, 100% {
-                text-shadow: 
-                    0 0 10px var(--neon-cyan),
-                    0 0 20px var(--neon-cyan),
-                    0 0 30px var(--neon-cyan);
-            }
-            50% {
-                text-shadow: 
-                    0 0 10px var(--neon-pink),
-                    0 0 20px var(--neon-pink),
-                    0 0 30px var(--neon-pink);
-            }
-        }
-
-        @keyframes glitch-anim-1 {
-            0%, 100% { clip: rect(30px, 9999px, 10px, 0); }
-            50% { clip: rect(60px, 9999px, 40px, 0); }
-        }
-
-        @keyframes glitch-anim-2 {
-            0%, 100% { clip: rect(80px, 9999px, 60px, 0); }
-            50% { clip: rect(20px, 9999px, 100px, 0); }
-        }
-
-        .subtitle {
-            font-size: 1.5rem;
-            margin: 30px 0;
-            color: var(--neon-green);
-            text-shadow: 0 0 20px var(--neon-green);
-            animation: typing 3s steps(30, end);
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 3px solid var(--neon-green);
-        }
-
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 30px;
-            justify-content: center;
-            margin-top: 40px;
-        }
-
-        .cyber-btn {
-            padding: 15px 40px;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            text-decoration: none;
-            color: #fff;
-            border: 2px solid var(--neon-cyan);
-            background: transparent;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s;
-            cursor: pointer;
-            font-family: 'Courier New', monospace;
-        }
-
-        .cyber-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: var(--neon-cyan);
-            transform: translate(-50%, -50%);
-            transition: all 0.5s;
-            z-index: -1;
-        }
-
-        .cyber-btn:hover::before {
-            width: 110%;
-            height: 110%;
-        }
-
-        .cyber-btn:hover {
-            color: var(--dark-bg);
-            box-shadow: 
-                0 0 20px var(--neon-cyan),
-                inset 0 0 20px rgba(0, 255, 255, 0.2);
-            transform: translateY(-5px);
-        }
-
-        .cyber-btn.secondary {
-            border-color: var(--neon-pink);
-        }
-
-        .cyber-btn.secondary::before {
-            background: var(--neon-pink);
-        }
-
-        .cyber-btn.secondary:hover {
-            box-shadow: 
-                0 0 20px var(--neon-pink),
-                inset 0 0 20px rgba(255, 16, 240, 0.2);
-        }
-
-        /* Floating Icons */
-        .floating-icons {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .float-icon {
-            position: absolute;
-            font-size: 2rem;
-            animation: float-up 10s infinite linear;
-            opacity: 0.3;
-            color: var(--neon-cyan);
-        }
-
-        @keyframes float-up {
-            from {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.3;
-            }
-            90% {
-                opacity: 0.3;
-            }
-            to {
-                transform: translateY(-100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Features Section */
-        .features {
-            padding: 100px 50px;
-            background: linear-gradient(180deg, var(--dark-bg), rgba(10, 10, 20, 0.95));
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 60px;
-            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-pink));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .feature-card {
-            background: var(--card-bg);
-            padding: 40px;
-            border: 2px solid transparent;
-            border-image: linear-gradient(45deg, var(--neon-cyan), var(--neon-pink)) 1;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-pink));
-            z-index: -1;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
             opacity: 0;
             transition: opacity 0.3s;
-            filter: blur(10px);
         }
 
-        .feature-card:hover::before {
+        .feature-box:hover::before {
             opacity: 1;
         }
 
-        .feature-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.3);
+        .feature-box:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
         }
 
         .feature-icon {
             font-size: 3rem;
             margin-bottom: 20px;
             display: block;
-            animation: icon-rotate 4s infinite linear;
-        }
-
-        @keyframes icon-rotate {
-            0%, 100% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.1); }
         }
 
         .feature-title {
             font-size: 1.5rem;
+            font-weight: 700;
             margin-bottom: 15px;
-            color: var(--neon-green);
+            color: var(--light);
         }
 
         .feature-desc {
-            color: #aaa;
+            color: rgba(226, 232, 240, 0.7);
             line-height: 1.6;
         }
 
-        /* Stats Section */
-        .stats-section {
-            padding: 80px 50px;
-            background: rgba(0, 255, 255, 0.05);
-            position: relative;
-            overflow: hidden;
+        /* Services Section */
+        .services {
+            padding: 100px 5%;
         }
 
-        .stats-container {
+        .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 40px;
-            max-width: 800px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
-        .stat-box {
-            text-align: center;
-            padding: 30px;
-            background: var(--card-bg);
-            border: 1px solid var(--neon-cyan);
+        .service-card {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(236, 72, 153, 0.05));
+            padding: 50px;
+            border-radius: 20px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.3s;
             position: relative;
-            overflow: hidden;
         }
 
-        .stat-box::before {
-            content: '';
+        .service-card:hover {
+            transform: scale(1.02);
+            border-color: var(--primary);
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3);
+        }
+
+        .service-number {
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.3), transparent);
-            animation: stat-scan 3s infinite;
+            top: 20px;
+            right: 30px;
+            font-size: 4rem;
+            font-weight: 900;
+            color: rgba(99, 102, 241, 0.1);
+            font-family: 'Orbitron', sans-serif;
         }
 
-        @keyframes stat-scan {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: bold;
-            color: var(--neon-cyan);
-            text-shadow: 0 0 20px var(--neon-cyan);
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
             display: block;
-            margin-bottom: 10px;
         }
 
-        .stat-label {
-            color: #aaa;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        .service-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--light);
         }
 
-        /* Terminal Section */
-        .terminal-section {
-            padding: 100px 50px;
-            background: var(--dark-bg);
+        .service-desc {
+            color: rgba(226, 232, 240, 0.7);
+            margin-bottom: 25px;
+            line-height: 1.8;
         }
 
-        .terminal {
-            max-width: 900px;
-            margin: 0 auto;
-            background: #000;
-            border: 2px solid var(--neon-green);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 0 50px rgba(57, 255, 20, 0.5);
-        }
-
-        .terminal-header {
-            background: #222;
-            padding: 15px;
-            display: flex;
+        .service-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
             align-items: center;
             gap: 10px;
-            border-bottom: 1px solid var(--neon-green);
+            transition: all 0.3s;
         }
 
-        .terminal-btn {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .terminal-btn.red { background: #ff5f56; }
-        .terminal-btn.yellow { background: #ffbd2e; }
-        .terminal-btn.green { background: #27c93f; }
-
-        .terminal-title {
-            flex: 1;
-            text-align: center;
-            color: var(--neon-green);
-            font-family: 'Courier New', monospace;
-        }
-
-        .terminal-body {
-            padding: 20px;
-            font-family: 'Courier New', monospace;
-            color: var(--neon-green);
-            min-height: 300px;
-        }
-
-        .terminal-line {
-            margin: 10px 0;
-            opacity: 0;
-            animation: fadeIn 0.5s forwards;
-        }
-
-        .terminal-line:nth-child(1) { animation-delay: 0.5s; }
-        .terminal-line:nth-child(2) { animation-delay: 1s; }
-        .terminal-line:nth-child(3) { animation-delay: 1.5s; }
-        .terminal-line:nth-child(4) { animation-delay: 2s; }
-        .terminal-line:nth-child(5) { animation-delay: 2.5s; }
-
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-
-        .command::before {
-            content: "$ ";
-            color: var(--neon-cyan);
-        }
-
-        .output {
-            margin-left: 20px;
-            color: #aaa;
+        .service-link:hover {
+            gap: 15px;
+            color: var(--accent);
         }
 
         /* Contact Section */
         .contact {
-            padding: 100px 50px;
-            background: linear-gradient(180deg, rgba(10, 10, 20, 0.95), var(--dark-bg));
+            padding: 100px 5%;
+            background: rgba(15, 15, 35, 0.5);
         }
 
         .contact-container {
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
             text-align: center;
         }
 
-        .contact-info {
+        .contact-box {
+            background: rgba(15, 15, 35, 0.8);
+            padding: 60px;
+            border-radius: 20px;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            margin-top: 50px;
+        }
+
+        .contact-methods {
             display: flex;
             justify-content: center;
-            gap: 40px;
+            gap: 30px;
             margin-top: 40px;
         }
 
-        .contact-item {
-            display: flex;
-            flex-direction: column;
+        .contact-btn {
+            display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 30px;
-            background: var(--card-bg);
-            border: 1px solid var(--neon-cyan);
-            transition: all 0.3s;
+            gap: 15px;
+            padding: 25px 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 15px;
             text-decoration: none;
-            color: #fff;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
         }
 
-        .contact-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.3);
-            border-color: var(--neon-pink);
+        .contact-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.6);
         }
 
         .contact-icon {
             font-size: 2rem;
-            color: var(--neon-cyan);
         }
 
         /* Footer */
         footer {
-            padding: 40px;
-            background: #000;
+            padding: 60px 5% 30px;
+            background: var(--darker);
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-brand p {
+            color: rgba(226, 232, 240, 0.6);
+            line-height: 1.8;
+        }
+
+        .footer-links h4 {
+            margin-bottom: 20px;
+            color: var(--light);
+        }
+
+        .footer-links a {
+            display: block;
+            color: rgba(226, 232, 240, 0.6);
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
             text-align: center;
-            border-top: 2px solid var(--neon-cyan);
+            padding-top: 30px;
+            border-top: 1px solid rgba(99, 102, 241, 0.1);
+            color: rgba(226, 232, 240, 0.5);
         }
 
-        .footer-text {
-            color: #666;
-            font-size: 0.9rem;
+        /* Mobile Menu */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
         }
 
-        .footer-text span {
-            color: var(--neon-pink);
-            animation: heart-beat 1s infinite;
+        .mobile-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--light);
+            transition: all 0.3s;
         }
 
-        @keyframes heart-beat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
-            header {
-                padding: 15px 20px;
+            .mobile-toggle {
+                display: flex;
             }
 
             nav ul {
-                display: none;
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: rgba(15, 15, 35, 0.98);
+                flex-direction: column;
+                padding: 50px;
+                transition: left 0.3s;
             }
 
-            .glitch {
+            nav ul.active {
+                left: 0;
+            }
+
+            .hero-text h1 {
                 font-size: 3rem;
             }
 
-            .subtitle {
-                font-size: 1.2rem;
+            .section-title {
+                font-size: 2rem;
             }
 
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .features, .terminal-section, .contact {
-                padding: 50px 20px;
-            }
-
-            .contact-info {
+            .contact-methods {
                 flex-direction: column;
             }
-        }
 
-        /* Cursor Trail Effect */
-        .cursor-trail {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--neon-cyan);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: cursor-anim 1s infinite;
-            z-index: 9998;
-        }
-
-        @keyframes cursor-anim {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(2);
-                opacity: 0;
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
             }
         }
 
-        /* Scanline Effect */
-        .scanline {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
-            animation: scanline 4s infinite linear;
-            z-index: 999;
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s;
         }
 
-        @keyframes scanline {
-            0% { top: 0; }
-            100% { top: 100%; }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loader">
-        <div class="loader-text">LOADING...</div>
-    </div>
-
-    <!-- Animated Background -->
-    <div class="cyber-grid"></div>
-    <canvas id="matrix-bg"></canvas>
-    <div class="scanline"></div>
+    <div class="bg-gradient"></div>
+    <div class="bg-overlay"></div>
 
     <!-- Header -->
-    <header>
+    <header id="header">
         <div class="nav-container">
-            <div class="logo">Drynchek1337DXC</div>
+            <div class="logo">DXC1337</div>
             <nav>
-                <ul>
-                    <li><a href="#home">HOME</a></li>
-                    <li><a href="#features">FEATURES</a></li>
-                    <li><a href="#terminal">TERMINAL</a></li>
-                    <li><a href="#contact">CONTACT</a></li>
+                <div class="mobile-toggle" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul id="nav-menu">
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#features">Возможности</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#contact">Контакты</a></li>
                 </ul>
             </nav>
         </div>
@@ -736,130 +680,141 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="floating-icons">
-            <span class="float-icon" style="left: 10%; animation-delay: 0s;">⚡</span>
-            <span class="float-icon" style="left: 20%; animation-delay: 1s;">💀</span>
-            <span class="float-icon" style="left: 30%; animation-delay: 2s;">🔥</span>
-            <span class="float-icon" style="left: 40%; animation-delay: 3s;">💎</span>
-            <span class="float-icon" style="left: 50%; animation-delay: 4s;">🌟</span>
-            <span class="float-icon" style="left: 60%; animation-delay: 5s;">⚡</span>
-            <span class="float-icon" style="left: 70%; animation-delay: 6s;">🚀</span>
-            <span class="float-icon" style="left: 80%; animation-delay: 7s;">💻</span>
-            <span class="float-icon" style="left: 90%; animation-delay: 8s;">🔐</span>
-        </div>
-        <div class="hero-content">
-            <div class="glitch-wrapper">
-                <h1 class="glitch">Drynchek1337DXC</h1>
+        <div class="hero-container">
+            <div class="hero-text">
+                <div class="tagline">⚡ ELITE CYBER PORTAL</div>
+                <h1>Drynchek1337DXC</h1>
+                <p>Передовые технологии информационной безопасности и цифровых решений. Профессиональный подход к работе с данными.</p>
+                <div class="cta-group">
+                    <a href="https://t.me/Drynchek1337DXC" class="btn btn-primary">
+                        📱 Telegram Channel
+                    </a>
+                    <a href="#services" class="btn btn-outline">
+                        Наши услуги
+                    </a>
+                </div>
             </div>
-            <p class="subtitle">[ CYBER PORTAL - ACCESS GRANTED ]</p>
-            <div class="cta-buttons">
-                <a href="https://t.me/Drynchek1337DXC" class="cyber-btn">
-                    TELEGRAM CHANNEL
-                </a>
-                <button class="cyber-btn secondary" onclick="alert('Welcome to the Matrix!')">
-                    ENTER SYSTEM
-                </button>
+            <div class="hero-card">
+                <div class="card-3d">
+                    <div class="card-icon">💎</div>
+                    <div class="card-title">PREMIUM ACCESS</div>
+                    <div class="card-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">1337+</span>
+                            <span class="stat-label">Users</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-label">Online</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">99.9%</span>
+                            <span class="stat-label">Uptime</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">Elite</span>
+                            <span class="stat-label">Quality</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
     <section id="features" class="features">
-        <h2 class="section-title">CORE FEATURES</h2>
+        <div class="section-header fade-in">
+            <h2 class="section-title">Наши преимущества</h2>
+            <p class="section-subtitle">Профессиональные решения для ваших задач</p>
+        </div>
         <div class="features-grid">
-            <div class="feature-card">
-                <span class="feature-icon">🛡️</span>
-                <h3 class="feature-title">SECURITY</h3>
-                <p class="feature-desc">Advanced encryption protocols and secure data transmission</p>
+            <div class="feature-box fade-in">
+                <span class="feature-icon">🔒</span>
+                <h3 class="feature-title">Безопасность</h3>
+                <p class="feature-desc">Многоуровневая система защиты данных с использованием современных протоколов шифрования</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-box fade-in">
                 <span class="feature-icon">⚡</span>
-                <h3 class="feature-title">SPEED</h3>
-                <p class="feature-desc">Lightning-fast processing and real-time data analysis</p>
+                <h3 class="feature-title">Скорость</h3>
+                <p class="feature-desc">Молниеносная обработка запросов и оптимизированная производительность системы</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-box fade-in">
+                <span class="feature-icon">🎯</span>
+                <h3 class="feature-title">Точность</h3>
+                <p class="feature-desc">Высокая точность обработки информации с минимальной погрешностью</p>
+            </div>
+            <div class="feature-box fade-in">
                 <span class="feature-icon">🌐</span>
-                <h3 class="feature-title">NETWORK</h3>
-                <p class="feature-desc">Global network infrastructure with 99.9% uptime</p>
+                <h3 class="feature-title">Доступность</h3>
+                <p class="feature-desc">Круглосуточный доступ к сервисам из любой точки мира</p>
             </div>
-            <div class="feature-card">
-                <span class="feature-icon">🔍</span>
-                <h3 class="feature-title">ANALYTICS</h3>
-                <p class="feature-desc">Deep data mining and pattern recognition algorithms</p>
+            <div class="feature-box fade-in">
+                <span class="feature-icon">💼</span>
+                <h3 class="feature-title">Профессионализм</h3>
+                <p class="feature-desc">Команда опытных специалистов с многолетним стажем работы</p>
             </div>
-            <div class="feature-card">
-                <span class="feature-icon">🤖</span>
-                <h3 class="feature-title">AUTOMATION</h3>
-                <p class="feature-desc">AI-powered automation and intelligent workflows</p>
-            </div>
-            <div class="feature-card">
-                <span class="feature-icon">📡</span>
-                <h3 class="feature-title">CONNECTIVITY</h3>
-                <p class="feature-desc">Seamless integration with multiple platforms</p>
+            <div class="feature-box fade-in">
+                <span class="feature-icon">🚀</span>
+                <h3 class="feature-title">Инновации</h3>
+                <p class="feature-desc">Использование передовых технологий и современных методик</p>
             </div>
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="stats-section">
-        <div class="stats-container">
-            <div class="stat-box">
-                <span class="stat-number" data-target="1337">0</span>
-                <span class="stat-label">Active Users</span>
-            </div>
-            <div class="stat-box">
-                <span class="stat-number" data-target="9999">0</span>
-                <span class="stat-label">Requests</span>
-            </div>
-            <div class="stat-box">
-                <span class="stat-number" data-target="100">0</span>
-                <span class="stat-label">Uptime %</span>
-            </div>
-            <div class="stat-box">
-                <span class="stat-number" data-target="247">0</span>
-                <span class="stat-label">Support</span>
-            </div>
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="section-header fade-in">
+            <h2 class="section-title">Наши услуги</h2>
+            <p class="section-subtitle">Комплексные решения для бизнеса и частных лиц</p>
         </div>
-    </section>
-
-    <!-- Terminal Section -->
-    <section id="terminal" class="terminal-section">
-        <h2 class="section-title">SYSTEM TERMINAL</h2>
-        <div class="terminal">
-            <div class="terminal-header">
-                <span class="terminal-btn red"></span>
-                <span class="terminal-btn yellow"></span>
-                <span class="terminal-btn green"></span>
-                <span class="terminal-title">drynchek1337@dxc:~</span>
+        <div class="services-grid">
+            <div class="service-card fade-in">
+                <span class="service-number">01</span>
+                <span class="service-icon">📊</span>
+                <h3 class="service-title">Аналитика данных</h3>
+                <p class="service-desc">Профессиональный анализ больших объемов данных с предоставлением детальных отчетов и рекомендаций</p>
+                <a href="#" class="service-link">Узнать больше →</a>
             </div>
-            <div class="terminal-body">
-                <div class="terminal-line command">whoami</div>
-                <div class="terminal-line output">drynchek1337dxc</div>
-                <div class="terminal-line command">cat /etc/status</div>
-                <div class="terminal-line output">[SYSTEM ONLINE] All services operational</div>
-                <div class="terminal-line command">echo "Welcome to the Matrix"</div>
-                <div class="terminal-line output">Welcome to the Matrix</div>
-                <div class="terminal-line command">access --grant</div>
-                <div class="terminal-line output">[ACCESS GRANTED] Authentication successful</div>
+            <div class="service-card fade-in">
+                <span class="service-number">02</span>
+                <span class="service-icon">🔍</span>
+                <h3 class="service-title">Поиск информации</h3>
+                <p class="service-desc">Расширенный поиск и верификация информации с использованием проверенных источников</p>
+                <a href="#" class="service-link">Узнать больше →</a>
+            </div>
+            <div class="service-card fade-in">
+                <span class="service-number">03</span>
+                <span class="service-icon">🛡️</span>
+                <h3 class="service-title">Консультации</h3>
+                <p class="service-desc">Экспертные консультации по вопросам информационной безопасности и защиты данных</p>
+                <a href="#" class="service-link">Узнать больше →</a>
+            </div>
+            <div class="service-card fade-in">
+                <span class="service-number">04</span>
+                <span class="service-icon">⚙️</span>
+                <h3 class="service-title">Автоматизация</h3>
+                <p class="service-desc">Разработка и внедрение автоматизированных систем для оптимизации бизнес-процессов</p>
+                <a href="#" class="service-link">Узнать больше →</a>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
-        <h2 class="section-title">ESTABLISH CONNECTION</h2>
         <div class="contact-container">
-            <p style="color: #aaa; margin-bottom: 30px;">Join our network and stay updated with the latest intel</p>
-            <div class="contact-info">
-                <a href="https://t.me/Drynchek1337DXC" class="contact-item">
-                    <span class="contact-icon">📱</span>
-                    <span>Telegram</span>
-                    <span style="color: var(--neon-cyan); font-size: 0.9rem;">@Drynchek1337DXC</span>
-                </a>
-                <div class="contact-item">
-                    <span class="contact-icon">🌐</span>
-                    <span>Status</span>
-                    <span style="color: var(--neon-green); font-size: 0.9rem;">ONLINE</span>
+            <div class="section-header fade-in">
+                <h2 class="section-title">Связаться с нами</h2>
+                <p class="section-subtitle">Мы всегда на связи и готовы ответить на ваши вопросы</p>
+            </div>
+            <div class="contact-box fade-in">
+                <div class="contact-methods">
+                    <a href="https://t.me/Drynchek1337DXC" class="contact-btn">
+                        <span class="contact-icon">💬</span>
+                        <div>
+                            <div>Telegram</div>
+                            <small style="opacity: 0.7;">@Drynchek1337DXC</small>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -867,179 +822,103 @@
 
     <!-- Footer -->
     <footer>
-        <p class="footer-text">
-            © 2024 Drynchek1337DXC | Crafted with <span>❤️</span> in the Digital Realm
-        </p>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Drynchek1337DXC</h3>
+                <p>Профессиональный портал информационных технологий. Мы предоставляем качественные услуги в сфере цифровых решений и информационной безопасности.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Навигация</h4>
+                <a href="#home">Главная</a>
+                <a href="#features">Возможности</a>
+                <a href="#services">Услуги</a>
+                <a href="#contact">Контакты</a>
+            </div>
+            <div class="footer-links">
+                <h4>Услуги</h4>
+                <a href="#">Аналитика</a>
+                <a href="#">Поиск данных</a>
+                <a href="#">Консультации</a>
+                <a href="#">Автоматизация</a>
+            </div>
+            <div class="footer-links">
+                <h4>Информация</h4>
+                <a href="#">О проекте</a>
+                <a href="#">Документация</a>
+                <a href="#">Поддержка</a>
+                <a href="#">FAQ</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Drynchek1337DXC. Все права защищены.</p>
+        </div>
     </footer>
 
     <script>
-        // Matrix Rain Effect
-        const canvas = document.getElementById('matrix-bg');
-        const ctx = canvas.getContext('2d');
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
-        const matrixArray = matrix.split("");
-
-        const fontSize = 10;
-        const columns = canvas.width / fontSize;
-
-        const drops = [];
-        for(let x = 0; x < columns; x++) {
-            drops[x] = 1;
-        }
-
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(10, 10, 15, 0.04)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = '#00ffff';
-            ctx.font = fontSize + 'px monospace';
-
-            for(let i = 0; i < drops.length; i++) {
-                const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
             }
-        }
-
-        setInterval(drawMatrix, 35);
-
-        // Resize canvas on window resize
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
         });
 
-        // Animated Counter
-        const counters = document.querySelectorAll('.stat-number');
-        const speed = 200;
+        // Mobile menu toggle
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+        }
 
-        const animateCounter = (counter) => {
-            const target = +counter.getAttribute('data-target');
-            const count = +counter.innerText;
-            const increment = target / speed;
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.getElementById('nav-menu').classList.remove('active');
+                }
+            });
+        });
 
-            if(count < target) {
-                counter.innerText = Math.ceil(count + increment);
-                setTimeout(() => animateCounter(counter), 10);
-            } else {
-                counter.innerText = target;
-            }
-        };
-
-        // Intersection Observer for counters
+        // Scroll animations
         const observerOptions = {
-            threshold: 0.5,
-            rootMargin: '0px'
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    const counter = entry.target;
-                    animateCounter(counter);
-                    observer.unobserve(counter);
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
                 }
             });
         }, observerOptions);
 
-        counters.forEach(counter => {
-            observer.observe(counter);
-        });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-        // Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if(target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+        // 3D card mouse effect
+        const card3d = document.querySelector('.card-3d');
+        if (card3d) {
+            card3d.addEventListener('mousemove', (e) => {
+                const rect = card3d.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                card3d.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
             });
-        });
 
-        // Cursor Trail Effect
-        document.addEventListener('mousemove', (e) => {
-            const trail = document.createElement('div');
-            trail.className = 'cursor-trail';
-            trail.style.left = e.pageX + 'px';
-            trail.style.top = e.pageY + 'px';
-            document.body.appendChild(trail);
-
-            setTimeout(() => {
-                trail.remove();
-            }, 1000);
-        });
-
-        // Terminal Typing Effect
-        const terminalLines = document.querySelectorAll('.terminal-line');
-        terminalLines.forEach((line, index) => {
-            line.style.animationDelay = `${index * 0.5}s`;
-        });
-
-        // Random Glitch Effect
-        setInterval(() => {
-            const glitch = document.querySelector('.glitch');
-            if(glitch && Math.random() > 0.9) {
-                glitch.style.animation = 'none';
-                setTimeout(() => {
-                    glitch.style.animation = 'glitch-anim 2s infinite';
-                }, 100);
-            }
-        }, 3000);
-
-        // Console Easter Egg
-        console.log('%c🎮 Welcome to Drynchek1337DXC Portal! 🎮', 
-            'color: #00ffff; font-size: 20px; font-weight: bold; text-shadow: 0 0 10px #00ffff;');
-        console.log('%c⚡ Access Granted - System Online ⚡', 
-            'color: #39ff14; font-size: 14px;');
-        console.log('%c📡 Connect via Telegram: @Drynchek1337DXC', 
-            'color: #ff10f0; font-size: 12px;');
-
-        // Page Visibility API for performance
-        document.addEventListener('visibilitychange', () => {
-            if(document.hidden) {
-                document.title = '⏸️ Paused - Drynchek1337DXC';
-            } else {
-                document.title = 'Drynchek1337DXC - Cyber Portal';
-            }
-        });
-
-        // Keyboard Shortcuts
-        document.addEventListener('keydown', (e) => {
-            if(e.ctrlKey && e.key === 'k') {
-                e.preventDefault();
-                alert('🚀 Secret Mode Activated! Welcome to the inner circle.');
-            }
-        });
-
-        // Dynamic Time Display
-        function updateTime() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('en-US', { 
-                hour12: false,
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
+            card3d.addEventListener('mouseleave', () => {
+                card3d.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
             });
-            
-            const terminalTitle = document.querySelector('.terminal-title');
-            if(terminalTitle) {
-                terminalTitle.textContent = `drynchek1337@dxc:~ [${timeString}]`;
-            }
         }
 
-        setInterval(updateTime, 1000);
+        console.log('%c🚀 Drynchek1337DXC Portal', 'color: #6366f1; font-size: 24px; font-weight: bold;');
+        console.log('%c✨ Elite Digital Solutions', 'color: #ec4899; font-size: 16px;');
     </script>
 </body>
 </html>
